@@ -27,11 +27,15 @@ doubleEveryOther [x] = [x]
 doubleEveryOther (x:xs) = (x) : (head xs * 2) : doubleEveryOther (tail xs)
 
 -- Exercise 4 -----------------------------------------
+sumDigit :: Integer -> Integer
+sumDigit n
+  | n == 0 = 0
+  | otherwise = (lastDigit n) + sumDigit (dropLastDigit n)
 
 -- Calculate the sum of all the digits in every Integer.
 sumDigits :: [Integer] -> Integer
-sumDigits = undefined
-
+sumDigits [] = 0
+sumDigits (x:xs) = sumDigit x + sumDigits xs
 
 -- Exercise 5 -----------------------------------------
 
