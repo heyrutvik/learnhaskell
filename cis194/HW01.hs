@@ -41,7 +41,11 @@ sumDigits (x:xs) = sumDigit x + sumDigits xs
 
 -- Validate a credit card number using the above functions.
 luhn :: Integer -> Bool
-luhn = undefined
+luhn n = 
+  if sumDigits (doubleEveryOther (toRevDigits n)) `mod` 10 == 0
+  then True
+  else False
+
 
 -- Exercise 6 -----------------------------------------
 
