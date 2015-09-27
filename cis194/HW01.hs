@@ -14,16 +14,17 @@ dropLastDigit n = (n - (lastDigit n)) `div` 10
 -- Exercise 2 -----------------------------------------
 
 toRevDigits :: Integer -> [Integer]
-toRevDigits 0 = []
 toRevDigits n
-  | n < 0 = []
+  | n <= 0 = []
   | otherwise = (lastDigit n) :  toRevDigits (dropLastDigit n)
 
 -- Exercise 3 -----------------------------------------
 
 -- Double every second number in a list starting on the left.
 doubleEveryOther :: [Integer] -> [Integer]
-doubleEveryOther = undefined
+doubleEveryOther [] = []
+doubleEveryOther [x] = [x]
+doubleEveryOther (x:xs) = (x) : (head xs * 2) : doubleEveryOther (tail xs)
 
 -- Exercise 4 -----------------------------------------
 
