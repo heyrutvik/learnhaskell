@@ -24,7 +24,7 @@ toRevDigits n
 doubleEveryOther :: [Integer] -> [Integer]
 doubleEveryOther [] = []
 doubleEveryOther [x] = [x]
-doubleEveryOther (x:xs) = (x) : (head xs * 2) : doubleEveryOther (tail xs)
+doubleEveryOther (first:second:rest) = (first) : (second * 2) : doubleEveryOther rest
 
 -- Exercise 4 -----------------------------------------
 sumDigit :: Integer -> Integer
