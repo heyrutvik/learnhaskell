@@ -24,16 +24,25 @@ colors = [Red, Green, Blue, Yellow, Orange, Purple]
 -- Get the number of exact matches between the actual code and the guess
 exactMatches :: Code -> Code -> Int
 exactMatches xs ys = sum [1 | xy <- zip xs ys, uncurry (==) xy]
+-- naive impls
+exactMatches1 :: Code -> Code -> Int
+exactMatches1 xs ys = sum [1 | xy <- zip xs ys, fst(xy) == snd(xy)]
 
 -- Exercise 2 -----------------------------------------
 
 -- For each peg in xs, count how many times is occurs in ys
 countColors :: Code -> [Int]
-countColors = undefined
+countColors = go colors
+                 where
+                   go :: [Peg] -> Code -> [Int]
+                   go [] _ = []
+                   go (x:xs) ys = (sum [1 | y <- ys, y == x]) : go xs ys
 
 -- Count number of matches between the actual code and the guess
 matches :: Code -> Code -> Int
-matches = undefined
+matches c1 c2 = sum $ map (temp) $ zip (countColors c1) (countColors c2)
+                where
+                  temp = uncurry (min)
 
 -- Exercise 3 -----------------------------------------
 
