@@ -48,17 +48,19 @@ matches c1 c2 = sum $ map (temp) $ zip (countColors c1) (countColors c2)
 
 -- Construct a Move from a guess given the actual code
 getMove :: Code -> Code -> Move
-getMove = undefined
+getMove s g = Move g (exactMatches s g) (matches s g)
 
 -- Exercise 4 -----------------------------------------
 
 isConsistent :: Move -> Code -> Bool
-isConsistent = undefined
+isConsistent (Move g e m) c = (e == exactMatches g c) && (m == matches g c)
 
 -- Exercise 5 -----------------------------------------
 
 filterCodes :: Move -> [Code] -> [Code]
-filterCodes = undefined
+filterCodes m cs = filter p cs
+                              where
+                                p = isConsistent m
 
 -- Exercise 6 -----------------------------------------
 
