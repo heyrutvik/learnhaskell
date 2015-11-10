@@ -41,7 +41,7 @@ sumDigits (x:xs) = sumDigit x + sumDigits xs
 
 -- Validate a credit card number using the above functions.
 luhn :: Integer -> Bool
-luhn n = 
+luhn n =
   if sumDigits (doubleEveryOther (toRevDigits n)) `mod` 10 == 0
   then True
   else False
@@ -54,4 +54,5 @@ type Peg = String
 type Move = (Peg, Peg)
 
 hanoi :: Integer -> Peg -> Peg -> Peg -> [Move]
-hanoi = undefined
+hanoi 0 a b c = []
+hanoi n a b c = hanoi (n-1) a c b ++ [(a, b)] ++ hanoi (n-1) c b a
