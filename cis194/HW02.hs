@@ -33,10 +33,10 @@ exactMatches1 xs ys = sum [1 | xy <- zip xs ys, fst(xy) == snd(xy)]
 -- For each peg in xs, count how many times is occurs in ys
 countColors :: Code -> [Int]
 countColors = go colors
-                 where
-                   go :: [Peg] -> Code -> [Int]
-                   go [] _ = []
-                   go (x:xs) ys = (sum [1 | y <- ys, y == x]) : go xs ys
+              where
+                go :: [Peg] -> Code -> [Int]
+                go [] _ = []
+                go (x:xs) ys = (sum [1 | y <- ys, y == x]) : go xs ys
 
 -- Count number of matches between the actual code and the guess
 matches :: Code -> Code -> Int
@@ -59,18 +59,27 @@ isConsistent (Move g e m) c = (e == exactMatches g c) && (m == matches g c)
 
 filterCodes :: Move -> [Code] -> [Code]
 filterCodes m cs = filter p cs
-                              where
-                                p = isConsistent m
+                   where
+                     p = isConsistent m
 
 -- Exercise 6 -----------------------------------------
 
 allCodes :: Int -> [Code]
-allCodes = undefined
+allCodes 0 = [[]]
+allCodes n = [c:cs | c <- colors, cs <- allCodes (n-1)]
 
 -- Exercise 7 -----------------------------------------
 
 solve :: Code -> [Move]
-solve = undefined
+solve secret = go secret (allCodes 6)
+          where
+            go :: Code -> [Code] -> [Move]
+            go _ [] = []
+            go s (c:cs)
+              | c == s = [gm]
+              | otherwise = gm : (go s $ filterCodes gm cs)
+              where
+                gm = getMove s c
 
 -- Bonus ----------------------------------------------
 
