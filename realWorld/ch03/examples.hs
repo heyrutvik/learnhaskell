@@ -54,3 +54,22 @@ data Tree a = Node a (Tree a) (Tree a)
 simpleTree = Node "parent"
              (Node "left child" Empty Empty)
              (Node "right child" Empty Empty)
+
+lend amount balance = let reserve = 100
+                          newBalance = balance - amount
+                      in if balance < reserve
+                         then Nothing
+                         else Just newBalance
+
+
+fromMaybe defval wrapped =
+  case wrapped
+  of Nothing -> defval
+     Just value -> value
+
+data Fruit = Apple | Orange | None deriving (Show)
+
+fruitType f = case f
+              of "apple" -> Apple
+                 "orange" -> Orange
+                 _ -> None
