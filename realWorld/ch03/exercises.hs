@@ -1,5 +1,5 @@
 module Ch03.Exercises where
-
+import Data.List
 data List a = Cons a (List a)
               | Nil
               deriving (Show)
@@ -66,3 +66,19 @@ isPalindrome xs =
         fs = fst (tuple)
         ss = snd (tuple)
     in (getLength fs == getLength ss) && (fs == ss)
+
+-- example of sortBy
+exampleSortBy :: [(Int, [Char])]
+exampleSortBy = sortBy cp [(length a, a) | a <- ["string", "hi", "helloworld"]]
+         where
+           cp x y = compare x y
+
+-- append element to list
+appendTo :: [a] -> a -> [a]
+appendTo [] c = c : []
+appendTo (x:xs) c = x : (appendTo xs c)
+
+ourIntersperse :: a -> [[a]] -> [a]
+ourIntersperse _ [] = []
+ourIntersperse _ (xs:[]) = xs
+ourIntersperse c (xs:xss) = joinList (appendTo xs c) (ourIntersperse c xss)
