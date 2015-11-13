@@ -30,5 +30,19 @@ getMean :: Fractional a => [a] -> a
 getMean [] = error "undefined"
 getMean xs = (getSum xs) / (getLength xs)
 
+-- reverse list
+getReverse :: [a] -> [a]
+getReverse zs = go [] zs
+  where
+    go :: [a] -> [a] -> [a]
+    go xs [] = xs
+    go xs (y:ys) = go (y:xs) ys
+
+-- join two list
+joinList :: [a] -> [a] -> [a]
+joinList [] ys = ys
+joinList (x:xs) ys = x : joinList xs ys
+
 -- turn list into a palindrome
-getPalindrome [] = undefined
+getPalindrome :: [a] -> [a]
+getPalindrome xs = joinList xs (getReverse xs)
