@@ -8,11 +8,11 @@ toList :: List a -> [a]
 toList Nil = []
 toList (Cons x xs) = x : toList xs
 
-data Tree a = Node a (Maybe (Tree a)) (Maybe (Tree a)) deriving (Show)
+data MaybeTree a = MNode a (Maybe (MaybeTree a)) (Maybe (MaybeTree a)) deriving (Show)
 
-maybeChild1 = Node "parent" (Nothing) (Nothing)
+maybeChild1 = MNode "parent" (Nothing) (Nothing)
 
-maybeChild2 = Node "parent" (Just (Node "left child" Nothing Nothing)) (Just (Node "right child" Nothing Nothing))
+maybeChild2 = MNode "parent" (Just (MNode "left child" Nothing Nothing)) (Just (MNode "right child" Nothing Nothing))
 
 -- get length of list
 -- getLength :: [a] -> Int is type what I thought it has, ghci told me this
@@ -82,3 +82,21 @@ ourIntersperse :: a -> [[a]] -> [a]
 ourIntersperse _ [] = []
 ourIntersperse _ (xs:[]) = xs
 ourIntersperse c (xs:xss) = joinList (appendTo xs c) (ourIntersperse c xss)
+
+data Tree a = Node a (Tree a) (Tree a)
+            | Empty
+              deriving (Show)
+
+tree0, tree1, tree2, tree3 :: Tree String
+tree0 = Empty
+tree1 = Node "a" (Empty) (Empty)
+tree2 = Node "a" (Empty) (Node "b" (Empty) (Empty))
+tree3 =
+    Node
+        "a"
+        (Node "b" (Empty) (Node "c" (Empty) (Empty)))
+        (Node "d" (Node "e" (Empty) (Empty)) (Empty))
+
+heightOfTree :: Tree a -> Int
+heightOfTree Empty = 0
+heightOfTree (Node _ l r) = 1 + (max (heightOfTree l) (heightOfTree r))
