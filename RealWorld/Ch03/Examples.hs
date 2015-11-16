@@ -1,4 +1,4 @@
-module Ch03.Examples where
+module RealWorld.Ch03.Examples where
 
 {- data Type Constructor = Value Constructor component1 component2 ... -}
 

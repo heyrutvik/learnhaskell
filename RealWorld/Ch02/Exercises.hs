@@ -1,3 +1,4 @@
+module RealWorld.Ch02.Exercises where
 {-
 #1
 

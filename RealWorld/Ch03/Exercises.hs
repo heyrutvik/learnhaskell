@@ -1,4 +1,4 @@
-module Ch03.Exercises where
+module RealWorld.Ch03.Exercises where
 import Data.List
 data List a = Cons a (List a)
               | Nil

@@ -1,3 +1,4 @@
+module GreatGood.Ch03.Types where
 {-
 Type
 

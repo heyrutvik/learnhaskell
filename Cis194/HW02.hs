@@ -1,5 +1,5 @@
 {-# OPTIONS_GHC -Wall #-}
-module HW02 where
+module Cis194.HW02 where
 
 -- Mastermind -----------------------------------------
 

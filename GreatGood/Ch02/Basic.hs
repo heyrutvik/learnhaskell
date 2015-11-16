@@ -1,3 +1,4 @@
+module GreatGood.Ch02.Basic where
 {-
 calling a function by putting a space after it and then typing out parameters
 is called 'Funcation Application' which has highest precedence of all.

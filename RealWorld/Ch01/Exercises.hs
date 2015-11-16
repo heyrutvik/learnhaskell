@@ -1,3 +1,4 @@
+module RealWorld.Ch01.Exercises where
 
 -- #3 count the number of words in a input file
 countWords = interact wordCount

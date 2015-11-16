@@ -1,5 +1,5 @@
 {-# OPTIONS_GHC -Wall #-}
-module HW01 where
+module Cis194.HW01 where
 
 -- Exercise 1 -----------------------------------------
 

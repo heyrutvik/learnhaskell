@@ -1,3 +1,4 @@
+module RealWorld.Ch02.Examples where
 {-
 polymorphic function.
 a is called type variable.
