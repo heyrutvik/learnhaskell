@@ -1,4 +1,5 @@
 import System.Environment (getArgs)
+import SplitLines (fixLines)
 
 interactWith :: (String -> String) -> FilePath -> FilePath -> IO ()
 interactWith function inputFile outputFile = do
@@ -12,4 +13,4 @@ main = mainWith myFunction
           case args of
             [input,output] -> interactWith function input output
             _ -> putStrLn "error: exactly two arguments needed"
-        myFunction = id
+        myFunction = fixLines
