@@ -27,6 +27,11 @@ safeInit xs = Just (go xs)
 break' :: (a -> Bool) -> [a] -> ([a], [a])
 break' p xs = ((takeWhile p xs), (dropWhile p xs))
 
+-- another break
+break'' :: (t -> Bool) -> [t] -> ([t], [t])
+break'' p xs = break q xs
+               where q n = not (p n)
+
 -- dropWhile drop elements while p is true
 -- dropWhile' drop elements while p is false
 dropWhile' :: (a -> Bool) -> [a] -> [a]
@@ -36,6 +41,4 @@ dropWhile' p xs = dropWhile q xs
 splitWith :: (a -> Bool) -> [a] -> [[a]]
 splitWith _ [] = []
 splitWith p xs = let (pre, suf) = break' p xs
-                 in pre : case suf
-                          of
-                            zs -> splitWith p (dropWhile' p zs)
+                 in pre : splitWith p (dropWhile' p suf) 
