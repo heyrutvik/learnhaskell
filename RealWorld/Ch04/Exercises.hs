@@ -23,22 +23,24 @@ safeInit xs = Just (go xs)
                 go (y:ys) = y : (go ys)
 
 -- break split list on first true
--- break' split line on first false
-break' :: (a -> Bool) -> [a] -> ([a], [a])
-break' p xs = ((takeWhile p xs), (dropWhile p xs))
+-- break1 split line on first false
+break1 :: (a -> Bool) -> [a] -> ([a], [a])
+break1 p xs = ((takeWhile p xs), (dropWhile p xs))
 
 -- another break
-break'' :: (t -> Bool) -> [t] -> ([t], [t])
-break'' p xs = break q xs
+break2 :: (t -> Bool) -> [t] -> ([t], [t])
+break2 p xs = break q xs
                where q n = not (p n)
 
+-- TODO write break without using any built-in functions
+
 -- dropWhile drop elements while p is true
--- dropWhile' drop elements while p is false
-dropWhile' :: (a -> Bool) -> [a] -> [a]
-dropWhile' p xs = dropWhile q xs
+-- dropWhile1 drop elements while p is false
+dropWhile1 :: (a -> Bool) -> [a] -> [a]
+dropWhile1 p xs = dropWhile q xs
                   where q n = not (p n)
 
 splitWith :: (a -> Bool) -> [a] -> [[a]]
 splitWith _ [] = []
-splitWith p xs = let (pre, suf) = break' p xs
-                 in pre : splitWith p (dropWhile' p suf) 
+splitWith p xs = let (pre, suf) = break1 p xs
+                 in pre : splitWith p (dropWhile1 p suf) 
