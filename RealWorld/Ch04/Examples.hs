@@ -65,7 +65,7 @@ filter1 p (x:xs)
 filter1 _ _ = []
 
 -- foldl
-foldl2 :: (a -> b -> a) -> a -> [b] -> a
+foldl2 :: (b -> a -> b) -> b -> [a] -> b
 foldl2 f acc (x:xs) = foldl2 f (f acc x) xs
 foldl2 _ acc [] = acc
 
