@@ -87,3 +87,17 @@ filter2 p xs = foldr2 step [] xs
                where
                  step x ys | p x = x : ys
                            | otherwise = ys
+
+-- map using foldr
+map2 :: (a -> b) -> [a] -> [b]
+map2 f xs = foldr2 step [] xs
+  where step x ys = f x : ys
+
+-- foldl using foldr
+-- TODO evaluate by hand
+foldl3 :: (b -> a -> b) -> b -> [a] -> b
+foldl3 f acc xs = foldr2 step id xs acc
+  where step x g a = g (f a x)
+
+append :: [a] -> [a] -> [a]
+append xs ys = foldr2 (:) ys xs
