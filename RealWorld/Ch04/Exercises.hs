@@ -73,3 +73,11 @@ takeWhile2 p xs = loop [] xs
     loop acc (y:ys) | p y = loop (y:acc) ys
                     | otherwise = reverse acc
     loop acc _ = reverse acc
+
+-- takeWhile using fold
+-- in step if p x then add x in acc
+-- otherise reset acc to []
+takeWhile3 :: (a -> Bool) -> [a] -> [a]
+takeWhile3 p xs = foldr step [] xs
+  where step x acc | p x = x : acc
+                   | otherwise = []
