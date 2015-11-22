@@ -34,15 +34,34 @@ type State = String -> Int
 -- Exercise 1 -----------------------------------------
 
 extend :: State -> String -> Int -> State
-extend = undefined
+extend sts sti s i = if sti == i then s else sts i
 
 empty :: State
-empty = undefined
+empty _ = 0
 
 -- Exercise 2 -----------------------------------------
 
+boolToInt :: Bool -> Int
+boolToInt True = 1
+boolToInt False = 0
+
 evalE :: State -> Expression -> Int
-evalE = undefined
+evalE st (Var v) = st v
+evalE _ (Val n) = n
+evalE st (Op l op r) = case op
+                       of
+                         Plus -> x + y
+                         Minus -> x - y
+                         Times -> x * y
+                         Divide -> x `div` y
+                         Gt -> boolToInt (x > y)
+                         Ge -> boolToInt (x >= y)
+                         Lt -> boolToInt (x < y)
+                         Le -> boolToInt (x <= y)
+                         Eql -> boolToInt (x == y)
+                       where
+                         x = evalE st l
+                         y = evalE st r
 
 -- Exercise 3 -----------------------------------------
 
